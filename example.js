@@ -5,4 +5,5 @@
 require('dotenv').config();
 let downloadFeed = require('./index');
 
-downloadFeed();
+//The num is optional
+downloadFeed(25);
