@@ -83,9 +83,16 @@ async function generateThumbnails(){
     //NOW GENERATE THE THUMBNAILS
     let files = await fsp.readdir(rawPath);
     console.log('GENERATING THUMBNAILS...');
+    
+    /*
     await files.forEach(async (file) => {
         await generateThumb(rawPath, file, thumbPath);
     });
+    */
+    for(let f = 0; f < files.length; f++){
+        await generateThumb(rawPath, files[f], thumbPath);
+    }
+    console.log('ALL THUMBNAILS GENERATED');
 }
 
 
@@ -105,7 +112,8 @@ async function downloadImages(instaPosts){
      instaPosts.forEach((post, index) => {
          imagesArray.push(new Promise(
              async (resolve, reject) => {
-                 await download(post.image, rawPath + post.id + '.jpg');
+                 let msg = await download(post.image, rawPath + post.id + '.jpg');
+                 console.log('  ' + msg);
                  resolve();
              }
          ));
