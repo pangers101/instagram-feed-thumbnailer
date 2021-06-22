@@ -8,7 +8,6 @@ require('dotenv').config();
 let fs = require('fs');
 let fsp = fs.promises;
 
-
 //Set the paths from the environment variables.
 if(!process.env.IG_IMAGEINPUT_DIR || !process.env.IG_IMAGEOUTPUT_DIR || !process.env.IG_JSON_DIR || !process.env.IG_JSON_FILE){
     throw new Error('Please make sure to set the path variables in your .env file');
@@ -29,7 +28,7 @@ async function downloadFeed(num = 25){
         await refreshInstagramToken();
         console.log('COMPLETED SUCCESSFULLY');
     }catch(e){
-        throw new Error(e);
+        console.error(e);
     }
 };
 
@@ -63,13 +62,9 @@ async function downloadPosts(num = 25){
 
 async function checkDirectories(){
 //create the directories if they don't exist
-    try{
-        await fsp.mkdir(rawPath, { recursive: true });
-        await fsp.mkdir(thumbPath, { recursive: true});
-        await fsp.mkdir(jsonPath, { recursive: true });
-    }catch(e){
-        throw new Error(e);
-    }
+    await fsp.mkdir(rawPath, { recursive: true });
+    await fsp.mkdir(thumbPath, { recursive: true});
+    await fsp.mkdir(jsonPath, { recursive: true });
 }
 
 
@@ -97,11 +92,24 @@ async function generateThumbnails(){
 
 
 async function generateThumb(inputpath, filename, outputpath){
+    
+    //Default image quality
+    let jpegQuality = 55;
+
+    //Use the env var for image quality if it's a valid number
+    if(process.env.IG_IMAGE_QUALITY && (!Number.isNaN(Number(process.env.IG_IMAGE_QUALITY)))){
+        jpegQuality = Number(process.env.IG_IMAGE_QUALITY);
+    }    
+    
+    let inSize = ((await fsp.stat(inputpath + filename)).size / 1024).toFixed(0);
+    let outSize = ((await fsp.stat(outputpath + filename)).size / 1024).toFixed(0);
+    
     await sharp(inputpath + filename)
         .resize(500)
+        .jpeg({ quality: jpegQuality })
         .toFile(outputpath + filename)
         .catch((err) => console.log(err)) ;
-    console.log('  Generated thumbnail: ' + filename);
+    console.log(`  Generated thumbnail (${inSize}kb => ${outSize}kb) (at quality ` + jpegQuality + ': ' + filename);
 }
 
 
