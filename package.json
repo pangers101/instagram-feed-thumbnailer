@@ -19,7 +19,6 @@
   "dependencies": {
     "dotenv": "^10.0.0",
     "instafeed-node-js": "^0.1.4",
-    "request": "^2.88.2",
     "sharp": "^0.28.3"
   }
 }
