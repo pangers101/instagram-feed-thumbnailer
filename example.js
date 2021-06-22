@@ -1,10 +1,5 @@
 require('dotenv').config();
 
-//let rawpath = process.env.IG_IMAGEINPUT_DIR;
-//let thumbpath = process.env.IG_IMAGEOUTPUT_DIR;
-
-require('dotenv').config();
+//Change require('./index') to require('instagram-feed-thumbnailer') in main project
 let downloadFeed = require('./index');
-
-//The num is optional
 downloadFeed(25);

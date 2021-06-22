@@ -4,18 +4,20 @@ const { instafeed, refreshToken } = require('instafeed-node-js');
 const path = require('path');
 const sharp = require('sharp');
 const download = require('./fetchimage');
+require('dotenv').config();
 let fs = require('fs');
 let fsp = fs.promises;
+
 
 //Set the paths from the environment variables.
 if(!process.env.IG_IMAGEINPUT_DIR || !process.env.IG_IMAGEOUTPUT_DIR || !process.env.IG_JSON_DIR || !process.env.IG_JSON_FILE){
     throw new Error('Please make sure to set the path variables in your .env file');
 }
 
-let rawPath = path.join(__dirname, process.env.IG_IMAGEINPUT_DIR);
-let thumbPath = path.join(__dirname, process.env.IG_IMAGEOUTPUT_DIR);
-let jsonPath = path.join(__dirname, process.env.IG_JSON_DIR);
-let jsonFile = path.join(__dirname, process.env.IG_JSON_DIR, process.env.IG_JSON_FILE);
+let rawPath = path.join('./', process.env.IG_IMAGEINPUT_DIR);
+let thumbPath = path.join('./', process.env.IG_IMAGEOUTPUT_DIR);
+let jsonPath = path.join('./', process.env.IG_JSON_DIR);
+let jsonFile = path.join('./', process.env.IG_JSON_DIR, process.env.IG_JSON_FILE);
 
 async function downloadFeed(num = 25){
    try{
