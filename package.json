@@ -1,0 +1,25 @@
+{
+  "name": "instagram-feed-thumbnailer",
+  "version": "1.0.1",
+  "description": "An Instagram API utility that downloads latest posts, caches them locally and generates and stores image thumbnails.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pangers101/instagram-feed-thumbnailer.git"
+  },
+  "author": "Chris Pangburn",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pangers101/instagram-feed-thumbnailer/issues"
+  },
+  "homepage": "https://github.com/pangers101/instagram-feed-thumbnailer#readme",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "instafeed-node-js": "^0.1.4",
+    "request": "^2.88.2",
+    "sharp": "^0.28.3"
+  }
+}
