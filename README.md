@@ -48,9 +48,9 @@ IG_JSON_FILE=instaposts.json
 IG_IMAGE_QUALITY=60
 ```
 
-Obviously replace the *ig_user_access_token* with your long-lived token obtained before. 
+Obviously replace the *ig_user_access_token* with your long-lived token obtained before.
 
-**IMPORTANT:** Make sure to **keep this secret** and add this **.env** file to your `.gitignore` file. 
+**IMPORTANT:** Make sure to **keep this secret** and add this **.env** file to your `.gitignore` file.
 
 There are three directories specified here that you can change if necessary:
 
@@ -73,7 +73,7 @@ Feel free to change the '25' to your required number of latest posts. Running `d
 
 ### 5. Scheduling the feed
 
-You can either run this manually each time you want to refresh the feed, or use a package such as [node-cron](https://www.npmjs.com/package/node-cron) to run the `downloadFeed(25)` function. Alternatively if you set a download script.
+You can either run this manually each time you want to refresh the feed, or use a package such as [node-cron](https://www.npmjs.com/package/node-cron) to run the `downloadFeed(25)` function.
 
 ## Bugs and issues
 
