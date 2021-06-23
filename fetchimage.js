@@ -1,8 +1,6 @@
 var fs = require('fs');
 let https = require('https');
 
-
-
 //OLD FUNCTION USING THE REQUEST MODULE (NOW DEPRECATED)
 /*
 var download = function(uri, filename, callback = ''){
