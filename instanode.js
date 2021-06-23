@@ -42,7 +42,7 @@ async function writeJsonFile(instaPosts){
         }
         //file written successfully
     });
-    console.log('JSON File written successfully at ' + jsonPath + jsonFile);
+    console.log('JSON File written successfully at ' + jsonFile);
 }
 
 
