@@ -1,6 +1,6 @@
 {
   "name": "instagram-feed-thumbnailer",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "An Instagram API utility that downloads latest posts, caches them locally and generates and stores image thumbnails.",
   "main": "index.js",
   "scripts": {
