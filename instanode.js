@@ -102,13 +102,14 @@ async function generateThumb(inputpath, filename, outputpath){
     }    
     
     let inSize = ((await fsp.stat(inputpath + filename)).size / 1024).toFixed(0);
-    let outSize = ((await fsp.stat(outputpath + filename)).size / 1024).toFixed(0);
     
     await sharp(inputpath + filename)
         .resize(500)
         .jpeg({ quality: jpegQuality })
         .toFile(outputpath + filename)
         .catch((err) => console.log(err)) ;
+        
+    let outSize = ((await fsp.stat(outputpath + filename)).size / 1024).toFixed(0);
     console.log(`  Generated thumbnail (${inSize}kb => ${outSize}kb) (at quality ` + jpegQuality + ': ' + filename);
 }
 
