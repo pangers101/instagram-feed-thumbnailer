@@ -100,29 +100,30 @@ async function generateThumb(inputpath, filename, outputpath){
     if(process.env.IG_IMAGE_QUALITY && (!Number.isNaN(Number(process.env.IG_IMAGE_QUALITY)))){
         jpegQuality = Number(process.env.IG_IMAGE_QUALITY);
     }    
-    
+
     let inSize = ((await fsp.stat(inputpath + filename)).size / 1024).toFixed(0);
     
     await sharp(inputpath + filename)
         .resize(500)
         .jpeg({ quality: jpegQuality })
         .toFile(outputpath + filename)
-        .catch((err) => console.log(err)) ;
+        .catch((err) => console.log(err));
     
     let outSize = ((await fsp.stat(outputpath + filename)).size / 1024).toFixed(0);
-    console.log(`  Generated JPG thumbnail (${inSize}kb => ${outSize}kb) (at quality ` + jpegQuality + ': ' + filename);    
+    console.log(`  Generated JPG thumbnail (${inSize}kb => ${outSize}kb) (at quality ` + jpegQuality + ': ' + filename + ')');    
     
     let { name } = path.parse(filename);
+
     let webpFile = name + '.webp';
     await sharp(inputpath + filename)
         .resize(500)
         .webp({ quality: jpegQuality })
         .toFile(outputpath + webpFile)
         .catch((err) => console.log(err)) ;
-    }
+    
 
-    webpOutSize = ((await fsp.stat(outputpath + webpFile)).size / 1024).toFixed(0);
-    console.log(`  Generated WEBP thumbnail (${inSize}kb => ${webpOutSize}kb) (at quality ` + jpegQuality + ': ' + webpFile);
+    let webpOutSize = ((await fsp.stat(outputpath + webpFile)).size / 1024).toFixed(0);
+    console.log(`  Generated WEBP thumbnail (${inSize}kb => ${webpOutSize}kb) (at quality ` + jpegQuality + ': ' + webpFile + ')');
 }
 
 
