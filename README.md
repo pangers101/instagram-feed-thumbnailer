@@ -14,6 +14,7 @@ This package downloads all the media files from the list of latest posts, genera
 * Generate thumbnails and save locally.
 * Currently console logs output (will soon integrate a proper logger).
 * Resets the expiry date of the FB access token to +60 days.
+* Updated version also exports into the WebP image format in addition to JPG.
 
 ## Installation & Usage
 

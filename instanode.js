@@ -108,9 +108,21 @@ async function generateThumb(inputpath, filename, outputpath){
         .jpeg({ quality: jpegQuality })
         .toFile(outputpath + filename)
         .catch((err) => console.log(err)) ;
-        
+    
     let outSize = ((await fsp.stat(outputpath + filename)).size / 1024).toFixed(0);
-    console.log(`  Generated thumbnail (${inSize}kb => ${outSize}kb) (at quality ` + jpegQuality + ': ' + filename);
+    console.log(`  Generated JPG thumbnail (${inSize}kb => ${outSize}kb) (at quality ` + jpegQuality + ': ' + filename);    
+    
+    let { name } = path.parse(filename);
+    let webpFile = name + '.webp';
+    await sharp(inputpath + filename)
+        .resize(500)
+        .webp({ quality: jpegQuality })
+        .toFile(outputpath + webpFile)
+        .catch((err) => console.log(err)) ;
+    }
+
+    webpOutSize = ((await fsp.stat(outputpath + webpFile)).size / 1024).toFixed(0);
+    console.log(`  Generated WEBP thumbnail (${inSize}kb => ${webpOutSize}kb) (at quality ` + jpegQuality + ': ' + webpFile);
 }
 
 
